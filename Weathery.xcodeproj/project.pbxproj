@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02094BEC2B25CE5000B4C121 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02094BEB2B25CE5000B4C121 /* WeatherModel.swift */; };
 		02094BEF2B25D37300B4C121 /* WeatherNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02094BEE2B25D37300B4C121 /* WeatherNotificationService.swift */; };
+		02094BF12B25FC5900B4C121 /* WeatherClosureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02094BF02B25FC5900B4C121 /* WeatherClosureService.swift */; };
 		021BC3232B24A1F600637497 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021BC3222B24A1F600637497 /* AppDelegate.swift */; };
 		021BC3272B24A1F600637497 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021BC3262B24A1F600637497 /* WeatherViewController.swift */; };
 		021BC32C2B24A1F600637497 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 021BC32B2B24A1F600637497 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		02094BEB2B25CE5000B4C121 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		02094BEE2B25D37300B4C121 /* WeatherNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNotificationService.swift; sourceTree = "<group>"; };
+		02094BF02B25FC5900B4C121 /* WeatherClosureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherClosureService.swift; sourceTree = "<group>"; };
 		021BC31F2B24A1F500637497 /* Weathery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weathery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		021BC3222B24A1F600637497 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		021BC3262B24A1F600637497 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -67,10 +69,18 @@
 		02094BED2B25CE5700B4C121 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				02094BEE2B25D37300B4C121 /* WeatherNotificationService.swift */,
 				02094BEB2B25CE5000B4C121 /* WeatherModel.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		02094BF22B25FEBE00B4C121 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				02094BEE2B25D37300B4C121 /* WeatherNotificationService.swift */,
+				02094BF02B25FC5900B4C121 /* WeatherClosureService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		021BC3162B24A1F500637497 = {
@@ -93,6 +103,7 @@
 		021BC3212B24A1F500637497 /* Weathery */ = {
 			isa = PBXGroup;
 			children = (
+				02094BF22B25FEBE00B4C121 /* Services */,
 				02094BE92B25CE0700B4C121 /* App */,
 				02094BED2B25CE5700B4C121 /* Models */,
 				02094BEA2B25CE1000B4C121 /* Controllers */,
@@ -172,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				021BC3272B24A1F600637497 /* WeatherViewController.swift in Sources */,
+				02094BF12B25FC5900B4C121 /* WeatherClosureService.swift in Sources */,
 				02094BEC2B25CE5000B4C121 /* WeatherModel.swift in Sources */,
 				02094BEF2B25D37300B4C121 /* WeatherNotificationService.swift in Sources */,
 				021BC3232B24A1F600637497 /* AppDelegate.swift in Sources */,

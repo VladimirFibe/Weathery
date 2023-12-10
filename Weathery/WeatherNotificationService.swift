@@ -13,7 +13,7 @@ struct WeatherNotificationService {
 }
 
 extension WeatherViewController {
-    @objc func searchPressed() {
+    func fetchWithNotification() {
         let service = WeatherNotificationService()
         service.fetchWeather(cityName: "New York")
     }

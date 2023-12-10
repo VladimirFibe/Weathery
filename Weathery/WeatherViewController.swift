@@ -123,6 +123,10 @@ extension WeatherViewController {
 
         return text
     }
+
+    @objc func searchPressed() {
+        fetchWithClosure()
+    }
 }
 
 
