@@ -64,6 +64,13 @@ class WeatherViewController: UIViewController {
 }
 
 extension WeatherViewController {
+    @objc private func searchPressed() {
+        let service = WeatherNotificationService()
+        service.fetchWeather(cityName: "New York")
+    }
+}
+
+extension WeatherViewController {
     private func setupViews() {
         temperatureLabel.attributedText = makeTemperatureText(with: "22")
         [backgroundView,
@@ -77,6 +84,23 @@ extension WeatherViewController {
         [searchStackView, conditionImageView, temperatureLabel, cityLabel].forEach {
             rootStackView.addArrangedSubview($0)
         }
+        searchButton.addTarget(self, action: #selector(searchPressed), for: .primaryActionTriggered)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didReceiveWeather),
+            name: .didReceiveWeather,
+            object: nil
+        )
+    }
+
+    @objc private func didReceiveWeather(_ notification: Notification) {
+        print("didReceiveWeather")
+        guard let data = notification.userInfo as? [String: WeatherModel] else { return }
+        guard let weather = data["currentWeather"] else { return }
+        temperatureLabel.attributedText = makeTemperatureText(with: weather.temperatureString)
+        conditionImageView.image = UIImage(systemName: weather.conditionName)
+        cityLabel.text = weather.cityName
+
     }
 
     private func setupConstraints() {
@@ -115,6 +139,10 @@ extension WeatherViewController {
 
         return text
     }
+}
+
+extension Notification.Name {
+    static let didReceiveWeather = Notification.Name("didReceiveWeather")
 }
 
 #Preview {
