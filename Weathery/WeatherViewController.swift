@@ -1,6 +1,10 @@
 import UIKit
+import CoreLocation
 
 class WeatherViewController: UIViewController {
+    let locationManager = CLLocationManager()
+    var weatherService = WeatherDelegateService()
+    
     private let backgroundView: UIImageView = {
         $0.image = .background
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +82,13 @@ extension WeatherViewController {
             rootStackView.addArrangedSubview($0)
         }
         searchButton.addTarget(self, action: #selector(searchPressed), for: .primaryActionTriggered)
-        setupReceiveWeather()
+        locationButton.addTarget(self, action: #selector(locationPressed), for: .primaryActionTriggered)
+        searchTextField.delegate = self
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        weatherService.delegate = self
+//        setupReceiveWeather()
     }
 
     func setupUI(with weather: WeatherModel) {
@@ -94,15 +104,15 @@ extension WeatherViewController {
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            locationButton.widthAnchor.constraint(equalToConstant: 44),
-            locationButton.heightAnchor.constraint(equalToConstant: 44),
-
-            searchButton.widthAnchor.constraint(equalToConstant: 44),
-            searchButton.heightAnchor.constraint(equalToConstant: 44),
+            locationButton.widthAnchor.constraint(equalTo: locationButton.heightAnchor),
+            searchButton.widthAnchor.constraint(equalTo: searchButton.heightAnchor),
 
             conditionImageView.widthAnchor.constraint(equalToConstant: 120),
             conditionImageView.heightAnchor.constraint(equalToConstant: 120),
+            
             searchStackView.widthAnchor.constraint(equalTo: rootStackView.widthAnchor),
+            searchStackView.heightAnchor.constraint(equalToConstant: 44),
+            
             rootStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             rootStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: rootStackView.trailingAnchor, multiplier: 1)
@@ -125,11 +135,61 @@ extension WeatherViewController {
     }
 
     @objc func searchPressed() {
-        fetchWithClosure()
+        searchTextField.endEditing(true)
+//        fetchWithNotification()
+//        fetchWithClosure()
     }
 }
-
-
+//MARK: - UITextFieldDelegate
+extension WeatherViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextField.endEditing(true)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text == "" {
+            textField.placeholder = "Type something"
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let city = searchTextField.text {
+            weatherService.fetchWeather(cityName: city)
+        }
+        searchTextField.text = ""
+    }
+}
+//MARK: - CLLocationManagerDelegate
+extension WeatherViewController: CLLocationManagerDelegate {
+    @objc func locationPressed() {
+        locationManager.requestLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let long = location.coordinate.longitude
+            weatherService.fetchWeather(latitude: lat, longitude: long)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
+        print(error)
+    }
+}
+//MARK: -
+extension WeatherViewController: WeaterServiceDelegate {
+    func didFetchWeather(_ weatherService: WeatherDelegateService, weather: WeatherModel) {
+        setupUI(with: weather)
+    }
+    
+    
+}
 
 #Preview {
     WeatherViewController()
