@@ -8,12 +8,32 @@ struct WeatherDelegateService {
     weak var delegate: WeaterServiceDelegate?
     
     func fetchWeather(cityName: String) {
-        let weatherModel = WeatherModel(conditionId: 700, cityName: cityName, temperature: -10)
-        delegate?.didFetchWeather(self, weather: weatherModel)
+        Task {
+            do {
+                let response: WeatherResponse = try await APIClient.shared.request(.getCity(city: cityName))
+                let weatherModel = WeatherModel(conditionId: 800, cityName: response.name, temperature: response.main.temp)
+                DispatchQueue.main.async {
+                    delegate?.didFetchWeather(self, weather: weatherModel)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func fetchWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        let weatherModel = WeatherModel(conditionId: 800, cityName: "Paris", temperature: 25)
-        delegate?.didFetchWeather(self, weather: weatherModel)
+        
+        Task {
+            do {
+                let response: WeatherResponse = try await APIClient.shared.request(.getLocation(lat: latitude, lon: longitude))
+                let weatherModel = WeatherModel(conditionId: 800, cityName: response.name, temperature: response.main.temp)
+                DispatchQueue.main.async {
+                    delegate?.didFetchWeather(self, weather: weatherModel)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
     }
 }
