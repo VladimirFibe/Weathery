@@ -15,8 +15,3 @@ final class APIClient {
         return result
     }
 }
-
-enum APIError: Error {
-    case failedRequest
-    case failedTogetData
-}

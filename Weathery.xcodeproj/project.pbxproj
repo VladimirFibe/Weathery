@@ -18,6 +18,7 @@
 		E821A3562BEAAD7F00765C28 /* APIRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821A3552BEAAD7F00765C28 /* APIRoute.swift */; };
 		E821A3582BEAB00F00765C28 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821A3572BEAB00F00765C28 /* APIClient.swift */; };
 		E821A35A2BEAB71400765C28 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821A3592BEAB71400765C28 /* Weather.swift */; };
+		E8AF37CC2BEB0BFF00713DF7 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF37CB2BEB0BFF00713DF7 /* APIError.swift */; };
 		E8BBCA9B2BE9AE1000A8838F /* WeatheryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BBCA9A2BE9AE1000A8838F /* WeatheryView.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		E821A3552BEAAD7F00765C28 /* APIRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRoute.swift; sourceTree = "<group>"; };
 		E821A3572BEAB00F00765C28 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		E821A3592BEAB71400765C28 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		E8AF37CB2BEB0BFF00713DF7 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		E8BBCA9A2BE9AE1000A8838F /* WeatheryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatheryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +133,7 @@
 			children = (
 				E821A3552BEAAD7F00765C28 /* APIRoute.swift */,
 				E821A3572BEAB00F00765C28 /* APIClient.swift */,
+				E8AF37CB2BEB0BFF00713DF7 /* APIError.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				021BC3232B24A1F600637497 /* AppDelegate.swift in Sources */,
 				E8BBCA9B2BE9AE1000A8838F /* WeatheryView.swift in Sources */,
 				E821A3582BEAB00F00765C28 /* APIClient.swift in Sources */,
+				E8AF37CC2BEB0BFF00713DF7 /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

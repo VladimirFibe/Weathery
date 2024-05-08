@@ -182,13 +182,30 @@ extension WeatherViewController: CLLocationManagerDelegate {
         print(error)
     }
 }
-//MARK: -
+//MARK: - WeaterServiceDelegate
 extension WeatherViewController: WeaterServiceDelegate {
+    func didFailWithError(_ weatherService: WeatherDelegateService, error: APIError) {
+        let message: String
+        switch error {
+        case .httpResponse(code: let code):
+            message = "Network error. Status code: \(code)"
+        case .general(reason: let text):
+            message = text
+        default:
+            message = "Error"
+        }
+        showErrorAlert(with: message)
+    }
+    
     func didFetchWeather(_ weatherService: WeatherDelegateService, weather: WeatherModel) {
         setupUI(with: weather)
     }
     
-    
+    func showErrorAlert(with message: String) {
+        let alert = UIAlertController(title: "Error fetching weather", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
+    }
 }
 
 #Preview {
