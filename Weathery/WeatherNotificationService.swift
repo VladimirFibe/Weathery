@@ -16,7 +16,7 @@ struct WeatherNotificationService {
     }
 }
 
-extension WeatherViewController {
+extension WeatheryViewController {
 //MARK: - 3
     func fetchWithNotification() {
         let service = WeatherNotificationService()

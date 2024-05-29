@@ -9,7 +9,7 @@ struct WeatherClosureService {
     }
 }
 
-extension WeatherViewController {
+extension WeatheryViewController {
     func fetchWithClosure() {
         var service = WeatherClosureService()
         service.receivedWeatherHandler = setupUI
